@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+        input, textarea {
+            border: solid 1px black;
+            padding: 10px;
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+        }
+
+        .form, h1, h2 {
+            font-family: "Lato", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-lg p-8 w-full max-w-lg">
+        <div id="thankYouScreen" class="hidden text-center">
+            <h1 class="text-3xl font-bold mb-4">Thank You!</h1>
+            <p class="text-lg">Your submission has been received. We will get back to you shortly.</p>
+            <button id="resetFormButton" class="mt-6 bg-[#7C5A6CFF] text-white px-6 py-2 rounded-md font-semibold hover:bg-[#5A3E4C] transition duration-300">
+                Submit Another Response
+            </button>
+        </div>
+
+        <div id="formScreen">
+            <h1 class="text-xl font-bold text-center mb-2">CONTACT US</h1>
+            <p class="text-4xl text-center mt-3 mb-10">We’re always on hand to answer your questions.</p>
+            <form id="contactForm" class="space-y-4">
+                <!-- First Name -->
+                <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name*" 
+                        class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name*" 
+                    class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email*" 
+                        class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+
+                <!-- Phone -->
+                <div class="form-group">
+                    <input type="tel" id="phone" name="phone " placeholder="Phone*" 
+                    class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                </div>
+
+                <!-- Services -->
+                <div class="form-group">
+                    <select id="service" name="service" placeholder="Select a service" 
+                        class="w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <option value="">Select a service</option>
+                        <option value="Laser Hair Removal">Laser Hair Removal</option>
+                        <option value="Dermal Fillers">Dermal Fillers</option>
+                        <option value="Lip Fillers">Lip Fillers</option>
+                        <option value="Lip Flip">Lip Flip</option>
+                        <option value="Dysport">Dysport</option>
+                        <option value="Botox">Botox</option>
+                        <option value="Chemical Peel">Chemical Peel</option>
+                        <option value="Hydrafacial">Hydrafacial</option>
+                        <option value="Microneedling">Microneedling</option>
+                        <option value="Morpheus8">Morpheus8</option>
+                        <option value="Plasma Skin Resurfacing">Plasma Skin Resurfacing</option>
+                        <option value="Laser Vein Treatment">Laser Vein Treatment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Message*" 
+                        class="w-full border-gray-300 p-2 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center mt-8">
+                    <button type="submit" 
+                        class="bg-[#7C5A6CFF] text-[white] px-20 py-3 text-md rounded-md  font-[600] hover:text-white transition duration-300">
+                        SUBMIT
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const thankYouScreen = document.getElementById("thankYouScreen");
+        const formScreen = document.getElementById("formScreen");
+        const resetFormButton = document.getElementById("resetFormButton");
+        let isSubmitting = false;
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            if (isSubmitting) {
+                alert("Form is already being submitted. Please wait.");
+                return;
+            }
+
+            // Basic validation
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const message = document.getElementById("message").value;
+            const service = document.getElementById("service").value;
+
+            if (!firstName || !lastName || !email || !phone || !service || !message) {
+                alert("Please fill out all required fields.");
+                return;
+            }
+
+            // Prevent spamming
+            isSubmitting = true;
+
+            axios.post("https://hooks.zapier.com/hooks/catch/21346557/2ktxh0z/", {
+                firstName,
+                lastName,
+                email,
+                phone,
+                service,
+                message
+            }, {
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    formScreen.classList.add("hidden");
+                    thankYouScreen.classList.remove("hidden");
+                } else {
+                    throw new Error("CORS or network issue");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error.message);
+                alert("There was an error submitting the form. Please try again.");
+            })
+            .finally(() => {
+                isSubmitting = false;
+            });
+        });
+
+        resetFormButton.addEventListener("click", () => {
+            form.reset();
+            formScreen.classList.remove("hidden");
+            thankYouScreen.classList.add("hidden");
+        });
+    </script>
+</body>
+</html>
