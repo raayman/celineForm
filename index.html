@@ -1,459 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Experience top-rated medical spa treatments including dermal fillers, Morpheus8, Hydrafacial, and laser hair removal. Expert injectors and 35 years of patient care ensure you achieve your aesthetic goals.">
-  <meta name="keywords" content="medical spa, dermal fillers, Morpheus8, Hydrafacial, laser hair removal, aesthetic treatments">
-  <meta name="author" content="Medical Spa">
-  <meta property="og:title" content="Top-Rated Medical Spa | Dermal Fillers & More">
-  <meta property="og:description" content="Our expert injectors enhance your natural beauty with precision and care. Book your consultation today.">
-  <meta property="og:image" content="/path-to-og-image.jpg">
-  <meta property="og:url" content="https://www.medicalspa.com">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Top-Rated Medical Spa | Dermal Fillers & More">
-  <meta name="twitter:description" content="Our expert injectors enhance your natural beauty with precision and care. Book your consultation today.">
-  <meta name="twitter:image" content="/path-to-twitter-image.jpg">
-  <title>Top-Rated Medical Spa | Enhance Your Natural Beauty</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+        input, textarea {
+            border: solid 1px black;
+            padding: 10px;
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+        }
+
+        .form, h1, h2 {
+            font-family: "Lato", sans-serif;
+        }
+
+        body, html {
+            background-color: white;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans">
-  <!-- Header Section -->
-
-
-  <!-- Hero Section -->
-  <section class="relative bg-black mt-[-20px] md:h-[70vh]">
-    <div class="absolute opacity-80 z-[0] top-0 h-full w-full hero"></div>
-    <div class="container md:absolute right-0 h-full mx-auto md:mx-0 md:justify-end px-4 py-16 flex flex-col md:flex-row items-center md:justify-end">
-      <div class="md:w-1/2 z-[2] mt-52 md:mt-0 items-center justify-center mx-auto text-center md:text-left space-y-6">
-        <h1 class="md:text-4xl text-2xl font-bold mb-10 md:text-gray-800 text-white">Our expert injectors restore volume, 
-            contour features, plump lips, and create facial balance.</h1>
-        <a href="#getcoupon" class="bg-[#d8adb9] text-black px-6 py-3 rounded-xs hover:bg-">Get Coupon</a>
-        <div class="flex flex-row w-[300px] md:mx-0 mx-auto gap-4">
-            <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/celine-medspa-badge-1.webp" alt="35 years of Direct patient care experience" class="w-1/2 object-contain mb-4 md:mb-0">
-            <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/top-rated-medspa-1.webp" alt="Top Rated Medspa" class="w-1/2 object-contain b-4 md:mb-0">
+<body class="flex items-center justify-center min-h-screen">
+    <div class="bg-white rounded-lg p-8 w-full max-w-xl">
+        <div id="thankYouScreen" class="hidden text-center">
+            <h1 class="text-3xl font-bold mb-4">Thank You!</h1>
+            <p class="text-lg">Your submission has been received. We will get back to you shortly.</p>
+            <button id="resetFormButton" class="mt-6 bg-[#7C5A6CFF] text-white px-6 py-2 rounded-md font-semibold hover:bg-[#5A3E4C] transition duration-300">
+                Submit Another Response
+            </button>
         </div>
-      </div>
+
+        <div id="formScreen">
+            <h1 class="text-xl font-bold text-center mb-2">CONTACT US</h1>
+            <p class="md:text-4xl text-2xl text-center mt-3 md:mb-10 mb-5">We’re always on hand to answer your questions.</p>
+            <form id="contactForm" class="space-y-2">
+                <div class="flex flex-col md:flex-row lg:space-x-4">
+                    <!-- First Name -->
+                    <div class="w-full md:w-1/2">
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name*" 
+                            class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="w-full md:w-1/2">
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name*" 
+                            class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row md:space-x-4 mt-2">
+                    <!-- Email -->
+                    <div class="w-full md:w-1/2">
+                        <input type="email" id="email" name="email" placeholder="Email*" 
+                            class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+
+                    <!-- Phone -->
+                    <div class="w-full md:w-1/2">
+                        <input type="tel" id="phone" name="phone" placeholder="Phone*" 
+                            class="w-full p-2 border-gray-300 p-1 rounded-md mt-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                    </div>
+                </div>
+
+                <!-- Services -->
+                <div class="form-group">
+                    <select id="service" name="service" placeholder="Select a service" 
+                        class="w-full border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" required>
+                        <option value="">Select a service</option>
+                        <option value="Laser Hair Removal">Laser Hair Removal</option>
+                        <option value="Dermal Fillers">Dermal Fillers</option>
+                        <option value="Lip Fillers">Lip Fillers</option>
+                        <option value="Lip Flip">Lip Flip</option>
+                        <option value="Dysport">Dysport</option>
+                        <option value="Botox">Botox</option>
+                        <option value="Chemical Peel">Chemical Peel</option>
+                        <option value="Hydrafacial">Hydrafacial</option>
+                        <option value="Microneedling">Microneedling</option>
+                        <option value="Morpheus8">Morpheus8</option>
+                        <option value="Plasma Skin Resurfacing">Plasma Skin Resurfacing</option>
+                        <option value="Laser Vein Treatment">Laser Vein Treatment</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Message*" 
+                        class="w-full border-gray-300 p-2 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500" rows="4" required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="flex justify-center mt-8">
+                    <button type="submit" 
+                        class="bg-[#7C5A6CFF] text-[white] px-20 py-3 text-md rounded-md  font-[600] hover:text-white transition duration-300">
+                        SUBMIT
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-  </section>
+
+    <script>
+        const form = document.getElementById("contactForm");
+        const thankYouScreen = document.getElementById("thankYouScreen");
+        const formScreen = document.getElementById("formScreen");
+        const resetFormButton = document.getElementById("resetFormButton");
+        let isSubmitting = false;
+
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            if (isSubmitting) {
+                alert("Form is already being submitted. Please wait.");
+                return;
+            }
+            const firstName = document.getElementById("firstName").value.trim();
+            const lastName = document.getElementById("lastName").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const service = document.getElementById("service").value.trim();
+            const message = document.getElementById("message").value.trim();
+
+            if (!firstName || !lastName || !email || !phone || !service || !message) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            isSubmitting = true;
+
+            try {
+                const response = await axios.post(
+                    "https://hooks.zapier.com/hooks/catch/21346557/2ktxh0z/",
+                    { firstName, lastName, email, phone, service, message },
+                    { headers: { "Content-Type": "text/plain" } }
+                );
+
+                if (response.status === 200) {
+                    formScreen.classList.add("hidden");
+                    thankYouScreen.classList.remove("hidden");
+                } else {
+                    throw new Error("Failed to submit the form.");
+                }
+            } catch (error) {
+                console.error("Submission Error:", error.message);
+                alert("There was an error submitting the form. Please try again later.");
+            } finally {
+                isSubmitting = false;
+            }
+        });
 
 
-
-  <section class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4 md:flex md:space-x-12">
-      <!-- Coupon Section -->
-      <div id="getcoupon" class="md:w-1/2 md:mb-0 mb-8 order-first md:order-last bg-white rounded-lg shadow-lg p-8">
-        <h3 class="text-3xl md:text-3xl text-center font-bold text-[#644756]">New Client Special</h3>
-        <p class="text-gray-800 text-3xl md:text-4xl text-center font-semibold mb-4"><span class="text-[#d8adb9] font-bold">$150 OFF</span> <br> A SYRINGE</p>
-        <iframe src="https://raayman.github.io/celineForm/" style="width:100%;background-color: white;min-height:60vh;border:none;border-radius:3px" title="Contact Us"></iframe>
-      </div>
-  
-      <!-- Text Section -->
-      <div class="md:w-1/2 space-y-6 md:order-first order-last p-4">
-        <h2 class="text-4xl font-bold text-gray-800">Look Younger and Fresher with Dermal Fillers</h2>
-        <p class="text-gray-600">Dermal fillers are a popular cosmetic treatment designed to rejuvenate and enhance your natural beauty. These injectable treatments are a fantastic way to address common signs of aging, such as wrinkles, fine lines, and volume loss. Dermal fillers provide a safe and effective solution to achieve a more youthful and refreshed appearance.</p>
-        <p class="text-gray-600">Our expert injectors play a crucial role in ensuring the success and safety of dermal filler treatments. With their specialized training and experience, our professionals can skillfully administer fillers to achieve natural-looking results while minimizing risks. They possess an in-depth understanding of facial anatomy and various injection techniques, allowing them to customize treatments according to each patient’s unique features and aesthetic goals.</p>
-      </div>
-    </div>
-  </section>
-  
-
-  <section class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
-      <!-- Image Section -->
-      <div class="md:w-1/2">
-        <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/celine-medical-spa-office.webp" alt="Celine Medical Spa Building" class="rounded-lg shadow-lg">
-      </div>
-      <!-- Content Section -->
-      <div class="md:w-1/2 mt-8 md:mt-0 md:pl-12 p-4">
-        <h2 class="text-4xl font-bold text-gray-800 mb-6">Why Choose Celine Medical Spa?</h2>
-        <p class="text-gray-600 mb-4">
-          At Celine Medical Spa, we bring over 35 years of direct patient care experience, led by a medical doctor and an advanced practice registered nurse with extensive knowledge of facial anatomy and aging. Our commitment to ongoing education ensures that we provide thorough consultations and customize each treatment plan to individual needs, using only the latest, FDA-approved innovations in devices and products for optimal results.
-        </p>
-        <p class="text-gray-600">
-          Since opening in March 2024, Celine Medical Spa has been dedicated to delivering personalized, high-quality care. Conveniently located in Dr. Phillips near Orlando’s top tourist attractions, we prioritize your satisfaction and safety. With flexible payment options, we strive to make top-notch aesthetic care accessible to all. Visit us to experience the difference our expertise and commitment can make in helping you look and feel your best.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">What Can Dermal Fillers Do for You?</h2>
-      <div class="space-y-6">
-        <!-- Benefit Item -->
-        <div class="flex md:flex-row flex-col items-start">
-          <div class="flex items-start space-x-4 mb-2">
-            <span class="text-pink-500"><i class="fas fa-check-circle"></i></span>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800">Smooth Out Wrinkles and Fine Lines</h3>
-              <p class="text-gray-600">As we age, our skin loses its elasticity and starts to show signs of wear and tear. Dermal fillers can help smooth out those pesky wrinkles and fine lines, particularly around the nose and mouth. Imagine looking in the mirror and seeing a smoother, more vibrant reflection staring back at you! </p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4 mb-2">
-            <span class="text-pink-500"><i class="fas fa-check-circle"></i></span>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800">Restore Lost Volume</h3>
-              <p class="text-gray-600">Over time, our skin tends to lose volume, making us look tired and gaunt. Dermal fillers can restore that lost volume, giving your face a fuller, more youthful appearance. Whether it's plumping up your cheeks, enhancing your lips, or filling in hollow areas under your eyes, dermal fillers can make a noticeable difference. </p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4 mb-2">
-            <span class="text-pink-500"><i class="fas fa-check-circle"></i></span>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800">Contour the Chin, Cheeks, and Jawline</h3>
-              <p class="text-gray-600">Enhancing your natural features has never been easier. Dermal fillers can contour and define your chin and cheeks, providing more structure and definition to your face. Whether you desire a sharper jawline, higher cheekbones, or a more defined chin, dermal fillers can help you achieve these aesthetic goals. </p>
-            </div>
-          </div>
-          <div class="flex items-start space-x-4 mb-2">
-            <span class="text-pink-500"><i class="fas fa-check-circle"></i></span>
-            <div>
-              <h3 class="text-xl font-semibold text-gray-800">Boost Your Confidence</h3>
-              <p class="text-gray-600">Feeling good about how you look can significantly impact your overall confidence and well-being. Dermal fillers offer a quick and relatively painless way to enhance your appearance, making you feel more confident in your skin. Whether it's for a special occasion or just to feel better in your day-to-day life, a little boost from dermal fillers can go a long way. </p>
-            </div>
-        </div>
-        <!-- Repeat Benefit Items -->
-        <!-- Add more as necessary -->
-      </div>
-    </div>
-  </section>
-
-  <!-- What to Expect Section -->
-  <section class="bg-pink-100 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">What to Expect During the Procedure</h2>
-      <p class="text-center text-gray-600 mb-8">The process of getting dermal fillers is straightforward and typically quick...</p>
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <!-- Step 1 -->
-        <div class="bg-white rounded-lg shadow-lg p-6 text-center relative">
-          <span class="text-5xl font-bold text-gray-400 opacity-20 absolute top-4 right-4">1</span>
-          <h3 class="text-xl font-semibold text-gray-800 mt-2">Consultation</h3>
-          <p class="text-gray-600 mt-2">Your journey begins with a consultation where you’ll discuss your goals and expectations with a qualified professional. 
-            They will assess your facial structure and skin condition to recommend the best treatment plan for you.</p>
-        </div>
-        <!-- Step 2 -->
-        <div class="bg-white rounded-lg shadow-lg p-6 text-center relative">
-          <span class="text-5xl font-bold text-gray-400 opacity-20 absolute top-4 right-4">2</span>
-          <h3 class="text-xl font-semibold text-gray-800 mt-2">Preparation</h3>
-          <p class="text-gray-600 mt-2">On the day of the procedure, the treatment area will be cleaned, and a topical anesthetic 
-            may be applied to ensure your comfort.</p>
-        </div>
-        <!-- Step 3 -->
-        <div class="bg-white rounded-lg shadow-lg p-6 text-center relative">
-          <span class="text-5xl font-bold text-gray-400 opacity-20 absolute top-4 right-4">3</span>
-          <h3 class="text-xl font-semibold text-gray-800 mt-2">Injection</h3>
-          <p class="text-gray-600 mt-2">
-            Using a fine needle, the filler will be injected into specific areas of your face. 
-            The procedure usually takes about 30 minutes, depending on the areas being treated.</p>
-        </div>
-        <!-- Step 4 -->
-        <div class="bg-white rounded-lg shadow-lg p-6 text-center relative">
-          <span class="text-5xl font-bold text-gray-400 opacity-20 absolute top-4 right-4">4</span>
-          <h3 class="text-xl font-semibold text-gray-800 mt-2">Aftercare</h3>
-          <p class="text-gray-600 mt-2">
-            After the injections, you might experience some mild swelling or bruising, which typically subsides within a few days. 
-            Your healthcare provider will give you specific aftercare instructions to ensure the best results.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="bg-white py-16">
-    <div class="container mx-auto px-4 md:flex md:space-x-12 items-center">
-      <!-- Image Section -->
-      <div class="md:w-1/2">
-        <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-celine-medical-spa-orlando-fl-juvederm.webp" alt="Juvéderm Model">
-      </div>
-      <!-- Content Section -->
-      <div class="md:w-1/2 mt-8 md:mt-0">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">JUVÉDERM</h2>
-        <p class="text-gray-600 mb-4">
-          Juvéderm is the leading collection of fillers to temporarily lift & contour cheeks, smooth lines, or plump lips. How? It temporarily restores your skin’s volume with a modified form of hyaluronic acid.
-        </p>
-        <p class="text-gray-600 mb-4">
-          It is the #1 chosen dermal filler collection in the US* that offers 5 different long-lasting fillers. Each one adds volume and is designed for different needs in different areas of the face, including lips, cheeks, or chin, depending on your unique needs. We have what you need to get the results you want.
-        </p>
-        <ul class="list-none text-gray-800 space-y-2">
-          <li><i class="fas fa-check text-pink-500"></i> Cheeks</li>
-          <li><i class="fas fa-check text-pink-500"></i> Fine Lines</li>
-          <li><i class="fas fa-check text-pink-500"></i> Lips</li>
-          <li><i class="fas fa-check text-pink-500"></i> Chin</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-pink-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">JUVÉDERM Before and After*</h2>
-      <div class="flex flex-row gap-6 mx-auto justify-center">
-        <!-- Image Card -->
-        <div class="grid grid-cols-2 gap-4">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-before-and-after-1-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-before-and-after-2-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-before-and-after-3-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-before-and-after-4-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-        </div>
-      </div>
-      <p class="text-sm text-gray-600 text-center mt-4">*Results may vary</p>
-    </div>
-  </section>
-
-  <section class="bg-white py-16">
-    <div class="container mx-auto px-4 md:flex md:space-x-12 items-center">
-      <!-- Image Section -->
-      <div class="md:w-1/2">
-        <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-celine-medical-spa-orlando-fl-restylanne.webp" alt="Restylane Model">
-      </div>
-      <!-- Content Section -->
-      <div class="md:w-1/2 mt-8 md:mt-0">
-        <h2 class="text-4xl font-bold text-gray-800 mb-4">RESTYLANE</h2>
-        <p class="text-gray-600 mb-4">
-          Dermal fillers are facial injection treatments used to help diminish wrinkles while restoring volume and fullness in the face and hands. There are several types of dermal fillers, one being hyaluronic acid.
-        </p>
-        <p class="text-gray-600">
-          All Restylane products are transparent hyaluronic acid sugars naturally found in the skin that help provide hydration, fullness, and elasticity.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="bg-pink-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">RESTYLANE Family Products</h2>
-      <p class="text-center text-gray-600 mb-8">
-        The Restylane family of products is a brand of hyaluronic acid dermal fillers. Each Restylane product is designed for a specific purpose.
-      </p>
-      <div class="flex flex-wrap justify-center">
-        <!-- Product Card -->
-        <div class="w-full  md:w-1/2 lg:w-1/3 xl:w-1/3 p-6">
-          <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">Restylane Silk</h3>
-            <p class="text-gray-600 mt-2 text-lg">The first FDA – approved product specifically designed for subtle lip augmentation and the smoothing of 
-              wrinkles around the mouth. It is composed of a gel that is smaller and smoother than other Restylane products, resulting in a softer,
-               more precise result — ideal for restoring and enhancing the lips. 
-              Additionally, Silk is administered via ultrafine needle, which is designed for improved accuracy and precision.</p>
-          </div>
-        </div>
-        <div class="w-full  md:w-1/2 lg:w-1/3 xl:w-1/3 p-6">
-          <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">Restylane Lyft</h3>
-            <p class="text-gray-600 mt-2 text-lg">Approved by the FDA to correct volume deficit in the back of the hands,
-               for cheek augmentation, and the correction of age – related midface contour deficiencies, 
-               as well as the treatment of moderate to severe facial folds, such as the nasolabial folds (smile lines). 
-               Lyft is the first and only hyaluronic filler approved by the FDA to treat face and hands. 
-              Lyft contains 0.3% lidocaine, which is added to reduce the discomfort during treatment.</p>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-wrap justify-center">
-        <div class="w-full md:w-1/3 xl:w-1/3 p-4">
-          <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">Restylane</h3>
-            <p class="text-gray-600 mt-2 text-lg">Used to add volume and fullness to the skin to correct moderate to severe facial wrinkles and folds, 
-              such as the lines from your nose to the corners of 
-              your mouth (nasolabial folds). Restylane is also indicated for lip augmentation.</p>
-          </div>
-        </div>
-        <div class="w-full md:w-1/3 xl:w-1/3 p-4">
-          <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">Restylane Refyne</h3>
-            <p class="text-gray-600 mt-2 text-lg">Integrates with your skin to help smooth out the lines that run alongside the 
-              corners of your mouth (nasolabial folds and marionette lines) and the flexibility you need 
-              for natural-looking movement and expressions.</p>
-          </div>
-        </div>
-        <div class="w-full md:w-1/3 xl:w-1/3 p-4">
-          <div class="bg-white rounded-lg shadow-xl p-6">
-            <h3 class="text-2xl font-semibold text-gray-800">Restylane Defyne</h3>
-            <p class="text-gray-600 mt-2 text-lg">Designed to act like your body’s own hyaluronic acid to help smooth out deeper 
-              lines around your mouth (nasolabial folds and marionette lines) 
-              while letting you look more natural through a range of facial expressions.</p>
-          </div>
-        </div>
-      </div>
-      <p class="text-sm text-gray-600 text-center mt-4">
-        Restylane products are approved only for patients over the age of 21.
-      </p>
-    </div>
-  </section>
-
-  <section class="bg-pink-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 text-center mb-8">RESTYLANE Before and After*</h2>
-      <div class="flex flex-row gap-6 mx-auto justify-center">
-        <!-- Image Card -->
-        <div class="grid grid-cols-2 gap-4">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-restylane-before-and-after-4-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-restylane-before-and-after-2-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-restylane-before-and-after-1-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-          <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-restylane-before-and-after-3-celine-medical-spa-orlando-fl.webp" alt="Before and After" class="rounded-lg shadow-lg md:h-[250px] w-full object-cover">
-        </div>
-      </div>
-      <p class="text-sm text-gray-600 text-center mt-4">*Results may vary</p>
-    </div>
-  </section>
-  
-  <section class="bg-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold text-gray-800 mb-4">Schedule Your Consultation</h2>
-      <p class="text-gray-600">
-        Experience the transformative power of expertly administered dermal fillers at our Celine Medical Spa. Whether you’re looking to enhance your natural features or combat the signs of aging, our skilled professionals are here to help you achieve your aesthetic goals with precision and care. Don’t wait to look and feel your best—call us today to schedule your appointment and start your journey to a more confident you.
-      </p>
-    </div>
-  </section>
-  
-  <section class="bg-pink-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-4xl font-bold text-gray-800 mb-8 text-center">Dermal Filler FAQs</h2>
-      <div class="space-y-4">
-        <!-- FAQ Item -->
-        <div class="border-b border-gray-300">
-          <button
-            class="w-full text-left flex justify-between items-center py-4 focus:outline-none"
-            onclick="toggleFaq(this)"
-          >
-            <span class="text-lg font-semibold text-gray-800">Are Dermal Fillers Safe?</span>
-            <i class="fas fa-chevron-down transition-transform transform"></i>
-          </button>
-          <div class="faq-content overflow-hidden max-h-0 transition-all duration-500">
-            <p class="text-gray-600 py-2">
-              Yes, dermal fillers are safe when administered by a qualified and experienced professional. At our medspa, we use FDA-cleared fillers and follow strict safety protocols to ensure your well-being.
-            </p>
-          </div>
-        </div>
-        <!-- Repeat FAQ Items -->
-        <div class="border-b border-gray-300">
-          <button
-            class="w-full text-left flex justify-between items-center py-4 focus:outline-none"
-            onclick="toggleFaq(this)"
-          >
-            <span class="text-lg font-semibold text-gray-800">How Long Do the Results Last?</span>
-            <i class="fas fa-chevron-down transition-transform transform"></i>
-          </button>
-          <div class="faq-content overflow-hidden max-h-0 transition-all duration-500">
-            <p class="text-gray-600 py-2">
-              Results typically last anywhere from 6 to 18 months, depending on the type of filler used and the treatment area.
-            </p>
-          </div>
-        </div>
-        <!-- Add more FAQ items as needed -->
-        <div class="border-b border-gray-300">
-          <button
-            class="w-full text-left flex justify-between items-center py-4 focus:outline-none"
-            onclick="toggleFaq(this)"
-          >
-            <span class="text-lg font-semibold text-gray-800">Is the Procedure Painful?</span>
-            <i class="fas fa-chevron-down transition-transform transform"></i>
-          </button>
-          <div class="faq-content overflow-hidden max-h-0 transition-all duration-500">
-            <p class="text-gray-600 py-2">
-              Most patients experience minimal discomfort during the procedure. A topical anesthetic is often applied to numb the area, and the fine needles used for injections cause little to no pain.
-            </p>
-          </div>
-        </div>
-
-        <div class="border-b border-gray-300">
-          <button
-            class="w-full text-left flex justify-between items-center py-4 focus:outline-none"
-            onclick="toggleFaq(this)"
-          >
-            <span class="text-lg font-semibold text-gray-800">What Should I Expect After the Treatment?</span>
-            <i class="fas fa-chevron-down transition-transform transform"></i>
-          </button>
-          <div class="faq-content overflow-hidden max-h-0 transition-all duration-500">
-            <p class="text-gray-600 py-2">
-              After treatment, you may experience some swelling, redness, or bruising, which typically resolves within a few days. Your provider will give you detailed aftercare instructions to help minimize these effects and ensure optimal results.
-            </p>
-          </div>
-        </div>
-
-        <div class="border-b border-gray-300">
-        <button
-            class="w-full text-left flex justify-between items-center py-4 focus:outline-none"
-            onclick="toggleFaq(this)"
-        >
-            <span class="text-lg font-semibold text-gray-800">Can Dermal Fillers Be Combined with Other Treatments?</span>
-            <i class="fas fa-chevron-down transition-transform transform"></i>
-        </button>
-        <div class="faq-content overflow-hidden max-h-0 transition-all duration-500">
-            <p class="text-gray-600 py-2">
-            Yes, dermal fillers can be combined with other cosmetic treatments such as Botox, chemical peels, or laser treatments for more comprehensive facial rejuvenation. Discuss your goals with your provider to create a personalized treatment plan.
-            </p>
-        </div>
-        </div>
-
-
-      </div>
-    </div>
-  </section>
-  
-  <script>
-    let openFaq = null;
-    function toggleFaq(button) {
-      const content = button.nextElementSibling;
-      const icon = button.querySelector('i');
-
-      if (openFaq && openFaq !== button) {
-        openFaq.nextElementSibling.style.maxHeight = null;
-        openFaq.querySelector('i').classList.remove('rotate-180');
-      }
-
-      if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-        icon.classList.remove('rotate-180');
-        openFaq = null;
-      } else {
-        content.style.maxHeight = content.scrollHeight + 'px';
-        icon.classList.add('rotate-180');
-        openFaq = button;
-      }
-    }
-  </script>
-
-<section class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4 md:flex md:space-x-12 items-center">
-      <!-- Image Section -->
-      <div class="md:w-1/2">
-        <img src="https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-celine-medical-spa-orlando-fl-bottom-contact-mob.webp" alt="Model" class="w-full">
-      </div>
-      <!-- Form Section -->
-      <div class="md:w-1/2 md:mb-0 mb-8 order-first md:order-last bg-white rounded-lg shadow-lg p-8 overflow-y-auto">
-        <h3 class="text-3xl md:text-3xl text-center font-bold text-[#644756]">New Client Special</h3>
-        <p class="text-gray-800 text-3xl md:text-4xl text-center font-semibold mb-4"><span class="text-[#d8adb9] font-bold">$150 OFF</span> <br> A SYRINGE</p>
-        <iframe src="https://raayman.github.io/celineForm/" style="width:100%;background-color: white;height:60vh;border:none;border-radius:3px" title="Contact Us"></iframe>
-      </div>
-      </div>
-    </div>
-  </section>
-
-  
+        resetFormButton.addEventListener("click", () => {
+            form.reset();
+            formScreen.classList.remove("hidden");
+            thankYouScreen.classList.add("hidden");
+        });
+    </script>
 </body>
 </html>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap');
-
-    body, h1, h2, p, button, a, h3 {
-   font-family: "Asap", sans-serif !important;
-   }
-
-   .hero {
-    background-image: url(https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-celine-medical-spa-orlando-fl.webp);
-  background-size: cover;
-  background-position: center;
-   }
-
-   @media screen and (max-width: 768px) {
-    .hero {
-        background-image: url(https://refdina.wordpress.com/wp-content/uploads/2025/01/dermal-fillers-celine-medical-spa-orlando-fl-mobile.webp);
-        background-size: cover;
-        background-position: top center;
-        background-attachment: unset;
-    }
-   }
-
-   html {
-    scroll-behavior: smooth;
-   }
-</style>
