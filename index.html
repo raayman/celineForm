@@ -104,58 +104,47 @@
         const resetFormButton = document.getElementById("resetFormButton");
         let isSubmitting = false;
 
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
             if (isSubmitting) {
                 alert("Form is already being submitted. Please wait.");
                 return;
             }
-
-            // Basic validation
             const firstName = document.getElementById("firstName").value.trim();
             const lastName = document.getElementById("lastName").value.trim();
             const email = document.getElementById("email").value.trim();
             const phone = document.getElementById("phone").value.trim();
-            const message = document.getElementById("message").value;
-            const service = document.getElementById("service").value;
+            const service = document.getElementById("service").value.trim();
+            const message = document.getElementById("message").value.trim();
 
             if (!firstName || !lastName || !email || !phone || !service || !message) {
-                alert("Please fill out all required fields.");
+                alert("Please fill out all fields.");
                 return;
             }
 
-            // Prevent spamming
             isSubmitting = true;
 
-            axios.post("https://hooks.zapier.com/hooks/catch/21346557/2ktxh0z/", {
-                firstName,
-                lastName,
-                email,
-                phone,
-                service,
-                message
-            }, {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            .then((response) => {
+            try {
+                const response = await axios.post(
+                    "https://hooks.zapier.com/hooks/catch/21346557/2ktxh0z/",
+                    { firstName, lastName, email, phone, service, message },
+                    { headers: { "Content-Type": "text/plain" } }
+                );
+
                 if (response.status === 200) {
                     formScreen.classList.add("hidden");
                     thankYouScreen.classList.remove("hidden");
                 } else {
-                    throw new Error("CORS or network issue");
+                    throw new Error("Failed to submit the form.");
                 }
-            })
-            .catch((error) => {
-                console.error("Error:", error.message);
-                alert("There was an error submitting the form. Please try again.");
-            })
-            .finally(() => {
+            } catch (error) {
+                console.error("Submission Error:", error.message);
+                alert("There was an error submitting the form. Please try again later.");
+            } finally {
                 isSubmitting = false;
-            });
+            }
         });
+
 
         resetFormButton.addEventListener("click", () => {
             form.reset();
