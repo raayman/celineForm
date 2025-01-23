@@ -140,8 +140,7 @@
                 );
 
                 if (response.status === 200) {
-                    formScreen.classList.add("hidden");
-                    thankYouScreen.classList.remove("hidden");
+                    window.top.location.href = "https://go.celinemedspa.com/1-2";
                 } else {
                     throw new Error("Failed to submit the form.");
                 }
